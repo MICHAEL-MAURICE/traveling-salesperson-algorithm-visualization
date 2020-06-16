@@ -1,4 +1,7 @@
+
+//array to store every city(vector)
 var cities = [];
+//totalCities
 var totalCities = 12;
 
 var recordDistance;
@@ -6,17 +9,19 @@ var bestEver;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  //creating cities and store them
   for (var i = 0; i < totalCities; i++) {
     var v = createVector(random(width), random(height));
     cities[i] = v;
   }
-
+//calling to functions to calculate the destace
   var d = calcDistance(cities);
   recordDistance = d;
   bestEver = cities.slice();
 }
 
 function draw() {
+  //drawing
   background(0);
   fill(255);
   noStroke();
@@ -25,6 +30,7 @@ function draw() {
 
 
   fill(255,0,255);
+  //drawing cities
   for (var i = 0; i < cities.length; i++) {
     ellipse(cities[i].x, cities[i].y, 8, 8);
 
@@ -33,6 +39,8 @@ function draw() {
   stroke(255);
   strokeWeight(1);
   noFill();
+
+//drawing lines(distance) between nodes (cities)
   beginShape();
   for (var i = 0; i < cities.length; i++) {
     vertex(cities[i].x, cities[i].y);
@@ -42,6 +50,7 @@ function draw() {
   stroke(255, 0, 255);
   strokeWeight(4);
   noFill();
+  //drawing lines(best distance) between nodes (cities)
   beginShape();
   for (var i = 0; i < cities.length; i++) {
     vertex(bestEver[i].x, bestEver[i].y);
@@ -64,7 +73,7 @@ function swap(a, i, j) {
   a[i] = a[j];
   a[j] = temp;
 }
-
+//this function to calculate the distance between nodes
 function calcDistance(points) {
   var sum = 0;
   for (var i = 0; i < points.length - 1; i++) {
